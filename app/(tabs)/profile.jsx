@@ -14,7 +14,7 @@ import { router } from 'expo-router'
 
 const Profile = () => {
   const {user, setUser, setIsLoggedIn}=useGlobalContext()
-  const { data: postsData, refetch } = useAppwrite(() => getUserPosts(user.$id));
+  const { data: postsData } = useAppwrite(() => getUserPosts(user.$id));
  
   const logout =async () => {
     await signOut();
@@ -22,6 +22,7 @@ const Profile = () => {
     setIsLoggedIn(false)
     router.replace('/sign-in');
   }
+  
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList 
@@ -39,7 +40,7 @@ const Profile = () => {
               <Image source={{ uri: user?.avatar}} resizeMode='cover'
               className="w-[90%] h-[90%] rounded-lg"/>
             </View>
-            <InfoBox title={user?.username}
+            <InfoBox title={user?.name}
              containerStyles='mt-5'
              titleStyles="text-lg"
             />

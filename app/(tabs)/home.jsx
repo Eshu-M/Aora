@@ -13,7 +13,7 @@ import { useGlobalContext } from '../../context/GlobalProvider'
 //npm install react-native-animatable expo-av
 
 const Home = () => {
-  const {user, setUser, setIsLoggedIn}=useGlobalContext()
+  const {user, setUser, setIsLoggedIn}=useGlobalContext();
   const { data: postsData, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
   const [refreshing, setRefreshing] = useState(false);
@@ -24,8 +24,8 @@ const Home = () => {
     await refetch();
     setRefreshing(false);
   }
-  console.log("Home  >>" , user);
-
+console.log("user >>", user);
+console.log("posts >>", postsData?.creator?.username);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList 
@@ -39,7 +39,7 @@ const Home = () => {
             <View className="justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">Welcome Back,</Text>
-                <Text className="text-2xl font-psemibold text-white">{user?.username}</Text>
+                <Text className="text-2xl font-psemibold text-white">{user?.name}</Text>
               </View>
               <View className="mt-1.5">
                 <Image source={images.logoSmall} className="w-9 h-10" resizeMode='contain'/>
